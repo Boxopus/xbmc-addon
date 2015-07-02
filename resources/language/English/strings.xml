@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<strings>
+    <!-- Setting Categories -->
+    <string id="32001">Boxopus Settings</string>
+
+    <!-- Settings -->
+    <string id="32002">XBMC Token (get it in Boxopus profile)</string>
+</strings>

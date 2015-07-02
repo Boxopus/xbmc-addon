@@ -1,13 +1,13 @@
-
 import sys
-import xbmcaddon
-import xbmcgui
-import xbmcplugin
 import urllib
 import urlparse
 import json
 import requests
-from resources.lib.mixpanel import Mixpanel
+
+import xbmcaddon
+import xbmcgui
+import xbmcplugin
+from lib.mixpanel import Mixpanel
 
 
 class BoxopusAddon(object):
