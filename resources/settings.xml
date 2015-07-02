@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
     <category label="32001">
-        <setting label="32002" type="text" id="apiKey" default=""/>
+        <setting label="32002" type="text" id="apiKey" default="b95cb2c7ba2423e20b212ba0a1e233001d2f7c7b"/>
     </category>
 </settings>

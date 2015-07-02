@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <addon id="plugin.video.boxopus"
-    name="boxopus"
+    name="boxopus.com"
     version="1.0.0"
     provider-name="Boxopus (info@boxopus.com)">
     <requires>
@@ -15,7 +15,7 @@
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
         <summary lang="en">Boxopus for XBMC</summary>
-        <description lang="en">Boxopus downloads torrents into the private space or in the cloud. Get one from https://boxopus.com</description>
+        <description lang="en">Boxopus downloads files into the private space or in the cloud. Get one from https://boxopus.com</description>
         <language></language>
         <license>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</license>
         <website>https://boxopus.com</website>

@@ -1,3 +1,4 @@
+
 import sys
 import xbmcaddon
 import xbmcgui
@@ -6,28 +7,30 @@ import urllib
 import urlparse
 import json
 import requests
+from resources.lib.mixpanel import Mixpanel
 
 
 class BoxopusAddon(object):
-    apiUrl = 'http://boxopus.loc/api/xbmc/'
+    apiUrl = 'https://boxopus.com/api/xbmc/'
 
     def __init__(self):
         self.addon = xbmcaddon.Addon()
-        self.apiKey = '785acfec5ebb884d5fa1c7c74a44d1ec292882b7'
-        # self.addon.getSetting('apiKey')
+        self.apiKey = self.addon.getSetting('apiKey')
         self.addonName = self.addon.getAddonInfo('name')
         self.addonUrl = sys.argv[0]
         self.addonHandle = int(sys.argv[1])
         self.addonArgs = urlparse.parse_qs(sys.argv[2][1:])
         self.addonContentType = self.addonArgs.get('content_type', ['video'])[0]
+        self.mixpanel = Mixpanel('8bb5f7d783f90afc3cd7979aa9b05877')
         xbmcplugin.setContent(self.addonHandle, 'movies')
 
     def run(self):
         try:
             mode = self.addonArgs.get('mode', ['home'])[0]
-
             if mode == 'home':
-                files = self.request(self.build_url(self.apiUrl, {'apiKey': self.apiKey}))
+                self.mixpanel.track(self.apiKey, 'Open XBMC Addon')
+                files = self.request(self.build_url(self.apiUrl, {
+                    'apiKey': self.apiKey, 'contentType': self.addonContentType}))
                 for file in files:
                     url = self.build_url(self.addonUrl, {'mode': 'dir', 'id': file['id']})
                     li = xbmcgui.ListItem(file['name'], iconImage='DefaultFolder.png')
@@ -37,7 +40,8 @@ class BoxopusAddon(object):
                 content = self.addonArgs.get('content', ['none'])[0]
                 if content == 'none':
                     hash = self.addonArgs.get('id')[0]
-                    response = self.request(self.build_url(self.apiUrl + hash, {'apiKey': self.apiKey}))
+                    response = self.request(self.build_url(self.apiUrl + hash, {
+                        'apiKey': self.apiKey, 'contentType': self.addonContentType}))
                     files = response['files']
                 else:
                     files = json.loads(content)
