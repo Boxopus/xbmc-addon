@@ -7,7 +7,6 @@ import requests
 import xbmcaddon
 import xbmcgui
 import xbmcplugin
-from lib.mixpanel import Mixpanel
 
 
 class BoxopusAddon(object):
@@ -21,14 +20,12 @@ class BoxopusAddon(object):
         self.addonHandle = int(sys.argv[1])
         self.addonArgs = urlparse.parse_qs(sys.argv[2][1:])
         self.addonContentType = self.addonArgs.get('content_type', ['video'])[0]
-        self.mixpanel = Mixpanel('8bb5f7d783f90afc3cd7979aa9b05877')
         xbmcplugin.setContent(self.addonHandle, 'movies')
 
     def run(self):
         try:
             mode = self.addonArgs.get('mode', ['home'])[0]
             if mode == 'home':
-                self.mixpanel.track(self.apiKey, 'Open XBMC Addon')
                 files = self.request(self.build_url(self.apiUrl, {
                     'apiKey': self.apiKey, 'contentType': self.addonContentType}))
                 for file in files:
